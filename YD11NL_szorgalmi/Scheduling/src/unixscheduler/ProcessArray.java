@@ -53,7 +53,7 @@ public class ProcessArray {
 		if(cycle%100==0) {
 			queue.get(0).setlastRun(cycle);
 			for(int i=0; i<processes.size(); i++) {
-				processes.get(i).ageCpuTime();
+				processes.get(i).ageCpuTime(kf);
 				processes.get(i).calculatePriority(kf);
 			}
 			setQueue();
@@ -108,8 +108,8 @@ public class ProcessArray {
 	public void calculateKf(double outerkf) {
 		kf=outerkf;
 		if(outerkf==0) {
-			//varakozok/(varakozok+1)
-			kf=(processes.size()-1)/(double)processes.size();
+			//2*varakozok/(2*varakozok+1)
+			kf=2*(processes.size()-1)/(double)(2*(processes.size()-1)+1); //vagy ((processes.size()-1)/(double)(2*(processes.size()-1)+1)
 		}
 	}
 

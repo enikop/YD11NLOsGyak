@@ -26,12 +26,12 @@ public class UnixProcess implements Comparable<UnixProcess> {
 		p_cpu++;
 	}
 	
-	public void ageCpuTime() {
-		p_cpu = (int)Math.floor(p_cpu/2.0);
+	public void ageCpuTime(double kf) {
+		p_cpu = (int)Math.floor(p_cpu*kf);
 	}
 	
 	public void calculatePriority(double kf) {
-		p_usrpri = Math.min(127, (int)Math.floor(P_USER + p_cpu*kf + 2*p_nice));
+		p_usrpri = Math.min(127, (int)Math.floor(P_USER + p_cpu/4 + 2*p_nice));
 		if(p_usrpri < 50) {
 			p_usrpri = 50;
 		}
